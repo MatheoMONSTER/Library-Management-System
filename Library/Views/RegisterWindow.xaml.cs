@@ -16,15 +16,15 @@ using System.Windows.Shapes;
 namespace Library.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy LoginWindow.xaml
+    /// Logika interakcji dla klasy RegisterWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class RegisterWindow : Window
     {
-        private StringBuilder hiddenPassword = new StringBuilder();
-        public LoginWindow()
+        public RegisterWindow()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            RegisterViewModel registerViewModel = new RegisterViewModel();
+            DataContext = registerViewModel;
         }
     }
 }

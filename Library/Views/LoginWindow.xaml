@@ -3,10 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:helpers="clr-namespace:Library.Helpers"
+        xmlns:converters="clr-namespace:Library.Converters"
         xmlns:viewmodels="clr-namespace:Library.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
         mc:Ignorable="d"
         Title="LoginWindow" Height="350" Width="450">
+    <Window.Resources>
+        <converters:MaskedTextConverter x:Key="MaskedTextConverter"/>
+    </Window.Resources>
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel>
@@ -15,8 +18,7 @@
             </StackPanel>
             <StackPanel>
                 <Label Content="Password:" HorizontalContentAlignment="Center"/>
-                <PasswordBox x:Name="PasswordBox" Width="200" Height="30"
-                             helpers:PasswordBoxAssistant.BoundPassword="{Binding Password}"/>
+                <TextBox x:Name="PasswordBox" Width="200" Height="30" Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource MaskedTextConverter}}"/>
             </StackPanel>
         </StackPanel>
         <Button Content="Log in" Width="150" Height="40" Command="{Binding LoginCommand}" Margin="10,221,240,23"/>
