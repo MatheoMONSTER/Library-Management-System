@@ -32,7 +32,8 @@ namespace Library.Views
 
         private void button_Register_Click(object sender, RoutedEventArgs e)
         {
-
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
         }
     }
 }

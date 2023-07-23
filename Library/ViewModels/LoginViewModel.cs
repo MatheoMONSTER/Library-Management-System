@@ -1,11 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Library.Database;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Input;
 
@@ -27,7 +23,7 @@ namespace Library.ViewModels
         private string _password;
         public string Password
         {
-            get { return _password; }   
+            get { return _password; }
             set
             {
                 _password = value;
@@ -46,7 +42,7 @@ namespace Library.ViewModels
         {
             using (var dbContext = new AppDbContext())
             {
-                User user = dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
+                User user = dbContext.Users.FirstOrDefault(u => u.Username == Username);
 
                 if (user == null)
                 {
@@ -56,26 +52,25 @@ namespace Library.ViewModels
                     return;
                 }
 
-                if(user.Password != Password)
+                byte[] hashedPassword = HashPassword(Password, user.Salt);
+
+                if (!hashedPassword.SequenceEqual(user.Password))
                 {
                     MessageBox.Show("The password is incorrect. Try again.");
+                    Password = string.Empty;
+                    return;
                 }
 
                 MessageBox.Show("Successfully logged in!");
             }
         }
-
-        private string SecureStringToString(SecureString secureString)
+        private byte[] HashPassword(string password, byte[] salt)
         {
-            IntPtr ptr = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(secureString);
-            try
+            using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000))
             {
-                return System.Runtime.InteropServices.Marshal.PtrToStringBSTR(ptr);
-            }
-            finally
-            {
-                System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(ptr);
+                return pbkdf2.GetBytes(32);
             }
         }
     }
+
 }
