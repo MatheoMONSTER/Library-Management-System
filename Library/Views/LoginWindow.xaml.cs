@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Library.Views
 {
-    /// <summary>
-    /// Logika interakcji dla klasy LoginWindow.xaml
-    /// </summary>
     public partial class LoginWindow : Window
     {
         private StringBuilder hiddenPassword = new StringBuilder();
@@ -25,6 +22,11 @@ namespace Library.Views
         {
             InitializeComponent();
             DataContext = new LoginViewModel();
+        }
+
+        private void button_Back_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

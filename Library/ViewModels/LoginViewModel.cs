@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Library.Database;
+using Library.Views;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Windows;
@@ -61,7 +62,15 @@ namespace Library.ViewModels
                     return;
                 }
 
-                MessageBox.Show("Successfully logged in!");
+                if(hashedPassword.SequenceEqual(user.Password))
+                {
+                    MessageBox.Show("Successfully logged in!");
+                    LoginWindow loginWindow = new LoginWindow();
+                    MainView mainView = new MainView();
+                    loginWindow.Close();
+                    mainView.Show();
+                }
+
             }
         }
         private byte[] HashPassword(string password, byte[] salt)

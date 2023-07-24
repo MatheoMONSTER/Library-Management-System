@@ -1,0 +1,26 @@
+﻿<Window x:Class="Library.Views.BorrowBooks"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:Library.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:BorrowBooksViewModel}"
+        mc:Ignorable="d"
+        Title="Borrow Books" Height="450" Width="800">
+    <Grid>
+        <ListBox ItemsSource="{Binding Books}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="16"/>
+                        <TextBlock Text="{Binding Author}" FontSize="12"/>
+                        <TextBlock Text="{Binding Publisher}" FontSize="12"/>
+                        <TextBlock Text="{Binding NumberOfPages, StringFormat='Number of Pages: {0}'}" FontSize="12"/>
+                        <Separator/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Content="Back" Width="100" Height="30" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" x:Name="back_Button" Click="back_Button_Click"/>
+    </Grid>
+</Window>
