@@ -1,7 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Library.Database;
+using Library.Views;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -9,7 +11,16 @@ namespace Library.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {
-
+        private int _id; 
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
         private string _username;
         public string Username
         {
@@ -58,7 +69,8 @@ namespace Library.ViewModels
 
             var newUser = new User
             {
-                Username = Username,
+                Id = Id,
+                Username = Username
             };
 
             byte[] salt = GenerateSalt();
@@ -74,6 +86,7 @@ namespace Library.ViewModels
             MessageBox.Show("User registered successfully!");
             Username = string.Empty;
             Password = string.Empty;
+
         }
 
         private byte[] GenerateSalt()

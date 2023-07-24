@@ -1,5 +1,4 @@
-﻿using Library.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,20 +15,17 @@ using System.Windows.Shapes;
 namespace Library.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy RegisterWindow.xaml
+    /// Logika interakcji dla klasy BorrowBooks.xaml
     /// </summary>
-    public partial class RegisterWindow : Window
+    public partial class BorrowBooks : Window
     {
-        public RegisterWindow()
+        public BorrowBooks()
         {
             InitializeComponent();
-            RegisterViewModel registerViewModel = new RegisterViewModel();
-            DataContext = registerViewModel;
         }
 
-        private void button_Back_Click(object sender, RoutedEventArgs e)
+        private void back_Button_Click(object sender, RoutedEventArgs e)
         {
-            RegisterWindow registerWindow = new RegisterWindow();
             this.Close();
         }
     }

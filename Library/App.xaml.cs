@@ -1,4 +1,5 @@
 ﻿using Library.Database;
+using Library.ViewModels;
 using Library.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,13 +23,9 @@ namespace Library
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            //var serviceProvider = new ServiceCollection() 
-            //    .AddDbContext<AppDbContext>(options => options.UseSqlServer("Data Source=DESKTOP-1HI3IIL;Initial Catalog=Library;Integrated Security=True;"))
-            //    .BuildServiceProvider();
-
             var welcomeScreen = new WelcomeScreen();
             welcomeScreen.Show();
+
         }
 
     }
